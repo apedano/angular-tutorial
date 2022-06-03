@@ -1,0 +1,71 @@
+<h3>Button with property binding and event binding</h3>
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">
+    Add new server</button>
+    <!-- <p>Is a new server allowed : {{allowNewServer}}</p> -->
+<p>Server status : {{serverCreationStatus}} <span [hidden]="clickCounter == 0"> {{clickCounter}} times</span> </p>
+<hr>
+<h3>Server name with property binding and event binding</h3>
+<label>Server name</label>
+<input class="form-control" (input)="onChangeServerName($event)">
+<p>{{serverName}}</p>
+<hr>
+<h3>Server name with two way binding</h3>
+<label>Server name</label>
+<input class="form-control" [(ngModel)]="serverName">
+<p>Server status : {{serverCreationStatus}} <span [hidden]="clickCounter == 0"> {{clickCounter}} times</span> </p>
+<hr>
+<app-server></app-server>
+<app-server></app-server>
+<hr>
+<h3>Databinding exercise</h3>
+<label>Username <i>two way binding</i></label>
+<input class="form-control" [(ngModel)]="username">
+<p>Username value via string interpolation: {{username}}</p>
+<hr>
+<h3>Directives</h3>
+
+<h4>Conditions in the template:<i>*ngif</i></h4>
+<p class="notes">The <b>*</b> in front of ngIf tells Angular that the directive is structural. Meaning that Angular will rap it into ng-template element. 
+    Structural directive apply real changes to the DOM, so if the condition in the if is not satisfied the element will not be there at all!</p>
+<p class="notes" *ngIf="username.length>0; else noServer">This paragraph is added to the DOM via the <code>ngif</code> condition: <b>{{username}}</b></p>
+<p *ngIf="username.length>0; else noServer">Username value via string interpolation: <b>{{username}}</b></p>
+<ng-template #noServer>
+    <p class="notes">This text is showned because of the else in the <code>ngIf</code> directive. The else uses the identificator <code>#noServer</code> in the <code>ng-template</code></p>
+    <p>No username has been created yet. Type the username in the input above</p>
+</ng-template>
+<button class="btn btn-primary" [disabled]="username.length==0" (click)="onUsernameReset()">Reset username</button>
+
+<h4>Styling elements dynamically:<i>ngStile</i></h4>
+<p class="notes">The following paragraph will be styled with <code>[ngstyle]</code>. Here we are binding the directive to a property (property binding) <code>[ngStyle]</code> with value <code>backgroundColor:randomizeColor()</code></p>
+<p class="notes">The style directive can use the dash notation <code>background-color</code> or the camel case one <code>colorBackground</code></p>
+<p [ngStyle]="{backgroundColor:getRandomizedColor()}">My background is randomized. click the button below to receck</p>
+
+<button class="btn btn-primary" (click)="randomColor()">Call randomizeColor()</button>
+
+<h4>Applying class dynamically:<i>ngClass</i></h4>
+<p class="notes">Here the class is binded with the property <code>sex</code> directly, which is changed by the method call in the click event binding of the button</p>
+<p [ngClass]="sex">My class is randomized to be male or female class. click the button below to receck</p>
+<button class="btn btn-primary" (click)="determineSex()">Call determineSex()</button>
+
+<h4>Outputting collections: <i>*ngFor</i></h4>
+<input class="form-control" [(ngModel)]="serverName">
+<button class="btn btn-primary" (click)="addServerNameToList()">Add {{serverName}} to the list</button>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="notes">Here the <code>*ngFor</code> is just repeiting the containing element for a <i>list.size</i> number of times</div>
+        </div>
+        <div class="col-xs-6">
+            <div class="notes">Here we use the variable name and the index (0-based) in an <code>div</code> tag</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <app-server *ngFor="let server of serverNames"></app-server>
+        </div>
+        <div class="col-xs-6">
+            <div class="server" *ngFor="let server of serverNames; ; let i = index">#{{i+1}} : {{server}}</div>
+            
+        </div>
+    </div>
+</div>

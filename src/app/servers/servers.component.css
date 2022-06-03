@@ -1,0 +1,24 @@
+p {
+    color:rgb(10, 107, 107)
+}
+
+.notes {
+    color:blue;
+}
+
+.male {
+    background-color: rgb(52, 52, 224);
+    color: aliceblue;
+}
+
+.female {
+    background-color:palevioletred;
+    color:beige;
+
+}
+
+.server {
+    font-weight: bold;
+    background-color: aquamarine;
+    color:red;
+}
