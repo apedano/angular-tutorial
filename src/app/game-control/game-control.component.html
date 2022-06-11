@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Content from ng-content</h3>
+        </div>
+        <div class="col-md-9">
+            <h3>Game controls</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <ng-content></ng-content>
+        </div>
+        <div class="col-md-9">
+            <div class="btn-group btn-group-lg" role="group" aria-label="game-control-buttons">
+                <button class="btn btn-success" (click)="onGameStart()">Game start!</button>
+                <button class="btn btn-warning" (click)="onGameStop()">Game stop!</button>
+                </div>
+        </div>
+    </div>
+</div>
+

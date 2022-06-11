@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <p>Numbers generated: {{numbers.length}}</p>
+            <label for="maxNumbers">Max number of numbers to generate</label>
+            <input #maxNumbers>
+
+        </div>
+        <div class="col-xs-9">
+            <app-game-control (gameStoppedOutput)="onGameStopped()" (numberGenerated)="onNumberGenerated($event)"> 
+                <p>This is a content passed by the parent <b>GameConsole</b> as content of the component tag <code>app-game-control</code> </p>
+            </app-game-control>        
+        </div>
+    </div>
+    <hr>
+    <div class="row" *ngFor="let number of numbers">
+        <app-generated-number [value]="number"></app-generated-number>
+    </div>
+</div>
