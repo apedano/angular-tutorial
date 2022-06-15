@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 notes">
+            <h3>Custom attribute directive</h3>
+            <p>Example of a custom attribute directive <code>basic-highlight.directive.ts</code></p>
+            <p>The <code>appBasicHighlight</code> directive is used in the list of the even numbers</p>
+            <p>It is not a good practice to manipulate the hosting elment <code>elementRef</code> directly with <code>this.elementRef.nativeElement.style.backgroundColor</code></p>
+            <p>With Angular we can use a renderer for that we use a new directive <code>appBetterHighlight</code> in the odd number list</p>
+            <p>Renderer is a better approach for service workers (where there is no access to the DOM, causing the error) and not in a normal browser where the DOM is available </p>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button
+          class="btn btn-primary"
+          (click)="onlyOdd = !onlyOdd">Switch Odd/even numbers</button>
+        <br><br>
+        <ul *ngIf="onlyOdd" class="list-group">
+          <li appBetterHighlight *ngFor="let odd of oddNumbers"
+            class="list-group-item"> {{odd}}
+          </li>
+        </ul>
+        <ul *ngIf="!onlyOdd" class="list-group">
+            <li appBasicHighlight *ngFor="let even of evenNumbers"
+              class="list-group-item"> {{even}}
+            </li>
+          </ul>
+        <ng-template *ngIf="onlyOdd===true; else onlyEven">
+          <p>Only odd</p>
+        </ng-template>
+        <ng-template #onlyEven>
+            <p>Only even</p>
+        </ng-template>
+        <p appBasicHighlight>Style me with appBasicHighlight</p>
+      </div>
+    </div>
+  </div>
+  

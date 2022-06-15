@@ -11,13 +11,19 @@ import { WarningComponent } from './warning/warning.component';
 import { GameControlComponent } from './game-control/game-control.component';
 import { GeneratedNumberComponent } from './game-control/generated-number/generated-number.component';
 import { GameConsoleComponent } from './game-console/game-console.component';
+import { CustomAttrDirectiveComponent } from './custom-attr-directive/custom-attr-directive.component';
+import { BasicHighlightDirective } from './custom-attr-directive/basic-highlight/basic-highlight.directive';
+import { BetterHighlightDirective } from './custom-attr-directive/better-highlight/better-highlight.directive';
 
 @NgModule({
   declarations: [
     AppComponent, 
     ServerComponent, ServersComponent, 
     WarningComponent, SuccessComponent, 
-    AlertsComponent, GameControlComponent, GeneratedNumberComponent, GameConsoleComponent
+    AlertsComponent, GameControlComponent, GeneratedNumberComponent, GameConsoleComponent, 
+    CustomAttrDirectiveComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective
   ],
   imports: [
     BrowserModule, FormsModule
