@@ -34,8 +34,21 @@
     <p>No username has been created yet. Type the username in the input above</p>
 </ng-template>
 <button class="btn btn-primary" [disabled]="username.length==0" (click)="onUsernameReset()">Reset username</button>
-
-<h4>Styling elements dynamically:<i>ngStile</i></h4>
+<hr>
+<h4>Switching multiple conditions:<i>*ngSwitch</i></h4>
+<button class="btn btn-warning" (click)="onSelectSwitchValue('warning')">warning</button>
+<button class="btn btn-success" (click)="onSelectSwitchValue('success')">success</button>
+<button class="btn btn-danger" (click)="onSelectSwitchValue('danger')">danger</button>
+<div>This is the selected value: {{switchSelectedValue}}</div>
+<p class="note">The following div is based on the <code>[ngSwitch]</code> directive based on property binding</p>
+<div [ngSwitch]="switchSelectedValue">
+    <p *ngSwitchCase="'success'">Value is SUCCESS</p>
+    <p *ngSwitchCase="'warning'">Value is WARNING</p>
+    <p *ngSwitchCase="'danger'">Value is DANGER</p>
+    <p *ngSwitchDefault>Default</p>
+</div>
+<p></p>
+<hr>
 <p class="notes">The following paragraph will be styled with <code>[ngstyle]</code>. Here we are binding the directive to a property (property binding) <code>[ngStyle]</code> with value <code>backgroundColor:randomizeColor()</code></p>
 <p class="notes">The style directive can use the dash notation <code>background-color</code> or the camel case one <code>colorBackground</code></p>
 <p [ngStyle]="{backgroundColor:getRandomizedColor()}">My background is randomized. click the button below to receck</p>

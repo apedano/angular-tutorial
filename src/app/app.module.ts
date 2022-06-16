@@ -14,6 +14,8 @@ import { GameConsoleComponent } from './game-console/game-console.component';
 import { CustomAttrDirectiveComponent } from './custom-attr-directive/custom-attr-directive.component';
 import { BasicHighlightDirective } from './custom-attr-directive/basic-highlight/basic-highlight.directive';
 import { BetterHighlightDirective } from './custom-attr-directive/better-highlight/better-highlight.directive';
+import { CustomStructDirectiveComponent } from './custom-struct-directive/custom-struct-directive.component';
+import { UnlessDirective } from './custom-struct-directive/unless/unless.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { BetterHighlightDirective } from './custom-attr-directive/better-highlig
     AlertsComponent, GameControlComponent, GeneratedNumberComponent, GameConsoleComponent, 
     CustomAttrDirectiveComponent,
     BasicHighlightDirective,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    CustomStructDirectiveComponent,
+    UnlessDirective
   ],
   imports: [
     BrowserModule, FormsModule

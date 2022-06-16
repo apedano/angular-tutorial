@@ -17,6 +17,7 @@ export class ServersComponent implements OnInit {
   randomizedColor: string = "white";
   sex: string = "unknown";
   serverNames: string[] = [];
+  switchSelectedValue: string = '';
 
 
   constructor() {
@@ -68,6 +69,10 @@ export class ServersComponent implements OnInit {
 
   determineSex() {
     this.sex = Math.random() > 0.5 ? "male" : "female";
+  }
+
+  onSelectSwitchValue(selection: string) {
+    this.switchSelectedValue = selection;
   }
 
 

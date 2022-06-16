@@ -7,6 +7,8 @@
             <p>It is not a good practice to manipulate the hosting elment <code>elementRef</code> directly with <code>this.elementRef.nativeElement.style.backgroundColor</code></p>
             <p>With Angular we can use a renderer for that we use a new directive <code>appBetterHighlight</code> in the odd number list</p>
             <p>Renderer is a better approach for service workers (where there is no access to the DOM, causing the error) and not in a normal browser where the DOM is available </p>
+            <p>The <code>appBetterHighlight</code> directive also reacts to events (mouse over) with <code>@HostListener</code> or the <code>@HostBinding</code> making it a dynamic directive</p>
+            <p>The directive accepts also property binding as inputs</p>
         </div>
     </div>
     <div class="row">
@@ -16,7 +18,7 @@
           (click)="onlyOdd = !onlyOdd">Switch Odd/even numbers</button>
         <br><br>
         <ul *ngIf="onlyOdd" class="list-group">
-          <li appBetterHighlight *ngFor="let odd of oddNumbers"
+          <li appBetterHighlight [defaultColor]="'lightcoral'" [highlightColor]="'red'" *ngFor="let odd of oddNumbers"
             class="list-group-item"> {{odd}}
           </li>
         </ul>
@@ -31,7 +33,18 @@
         <ng-template #onlyEven>
             <p>Only even</p>
         </ng-template>
-        <p appBasicHighlight>Style me with appBasicHighlight</p>
+        <p appBasicHighlight >Style me with appBasicHighlight</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 notes">
+          <h3>How a structural directive is rendered</h3>
+          <p>Tha following uses the traditional <code>*ngIf</code> structural directive</p>
+          <p *ngIf="!onlyOdd"> This is only odd with normal *ngIf </p>
+          <p>The <code>ng-template</code> defines a not rendered block, it only defines a template we can assing a #id to or a condition to be rendered with an <code>ngif</code> as in the following example</p>
+          <ng-template #onlyOddNgTemplate [ngIf]="!onlyOdd">
+            <p>This is the content of the <code>ng-template</code> </p>
+          </ng-template>
       </div>
     </div>
   </div>
