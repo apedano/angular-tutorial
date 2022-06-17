@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="notes">Services and dependency injection</h2>
+            <p class="notes">We use <b>Hierarchical injection</b> by construction injection and adding a provider in the hosting component for the <code>LoggingService</code> </p>
+            <p class="notes">If we provide the service on a component it will be the same instance for the component and for all childred component <b>they will all share the same instance</b>, but that instance <b>will not propagate upward</b></p>
+            <p class="notes">Therefore we can start from the services in the <code>module.ts</code> an instance of the service defined there will be shared throughout the whole application</p>
+            <p class="notes">Every time we specify a <code>provider</code> in the <code>@Component</code> decorator, we will assign a new instance of the service in the constructor injection.</p>
+            <p class="notes">If we have providers in all <code>account-manager</code>, <code>new-account</code> and <code>account</code> components they will receive a different <code>AccountService</code> each with its own accounts array</p>
+            <p class="notes">The solution is to add the provider in <code>app.module.ts</code> so we can also provide services into other services and share them in the entire application.</p>
+            <p class="notes">If we want to inject the <code>LoggingService</code> inside the <code>AccountService</code> we have to decorate with <code>@Injectable()</code> telling Angular that the service is something we should be able to inject elsewhere </p>
+            <h3 class="notes">Lazy loaded services</h3>
+            <p class="notes">From Angular 6+ you can define the provider in the @Injectable annotation of the service <code>@Injectable("{{ '{' }}"providedIn: 'root'"{{ '}' }}")</code> instead of <code>providers: [AccountService, LoggingService],</code> in <i>app.module.ts</i> </p>
+            <p class="notes">This will have the advantage of having the service lazely loaded by Angular</p>
+            <h3 class="notes">Services for intra components communications</h3>
+            <p class="notes">One way to implement communication through components via services is to creat an eventEmitter in the sevices which emit when a specific event happens where the interested component can subscribe to</p>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <app-new-account (accountAdded)="onAccountAdded($event)"></app-new-account>
+        <hr>
+        <app-account
+          *ngFor="let acc of accounts; let i = index"
+          [account]="acc"
+          [id]="i"
+        ></app-account>
+      </div>
+    </div>
+  </div>

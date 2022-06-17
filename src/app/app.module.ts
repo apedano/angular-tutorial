@@ -16,6 +16,10 @@ import { BasicHighlightDirective } from './custom-attr-directive/basic-highlight
 import { BetterHighlightDirective } from './custom-attr-directive/better-highlight/better-highlight.directive';
 import { CustomStructDirectiveComponent } from './custom-struct-directive/custom-struct-directive.component';
 import { UnlessDirective } from './custom-struct-directive/unless/unless.directive';
+import { AccountManagerComponent } from './account-manager/account-manager.component';
+import { AccountComponent } from './account-manager/account/account.component';
+import { NewAccountComponent } from './account-manager/new-account/new-account.component';
+import { LoggingService } from './account-manager/loggin.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { UnlessDirective } from './custom-struct-directive/unless/unless.directi
     WarningComponent, SuccessComponent, 
     AlertsComponent, GameControlComponent, GeneratedNumberComponent, GameConsoleComponent, 
     CustomAttrDirectiveComponent,
+    AccountManagerComponent, AccountComponent, NewAccountComponent, 
     BasicHighlightDirective,
     BetterHighlightDirective,
     CustomStructDirectiveComponent,
@@ -32,7 +37,7 @@ import { UnlessDirective } from './custom-struct-directive/unless/unless.directi
   imports: [
     BrowserModule, FormsModule
   ],
-  providers: [],
+  providers: [LoggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
