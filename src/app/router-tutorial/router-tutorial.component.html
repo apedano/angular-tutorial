@@ -41,7 +41,27 @@
             <code>{{snippet5}}</code>
          </pre>
          <div class="notes">This will always make the link to '/' home active because it is done via matching (contains) the current path with the associated link. With the following configuration we force the exact match</div>
+         <pre>
+            <code>{{snippet6}}</code>
+         </pre>
+         <h3 class="notes">Change route programmatically</h3>
+         <div>
+            <button class="btn btn-primary" (click)="goToGame()">Go to Game programmatically</button>
+         </div>
+         <div>
+            <button class="btn btn-primary" (click)="goToAccount()">Call account route with parameters</button>
+         </div>
          
-          
+         <div class="notes">
+            We can pass the expected parameters to the route and we can read them reactively on the account component
+         </div>
+         <pre>
+            <code>{{snippet7}}</code>
+         </pre>
+         <div class="notes">With the check inside we make sure that we can still use the @Input of the component normally</div>
+         <div class="notes">We can also call the router with the following anchor element by passing all the route parameters</div>
+         <pre>
+            <code>{{snippet8}}</code>
+         </pre>
     </div>
 </div>

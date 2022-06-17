@@ -7,5 +7,8 @@
     <button class="btn btn-default" (click)="onSetTo('inactive')">Set to 'inactive'</button>
     <button class="btn btn-default" (click)="onSetTo('unknown')">Set to 'unknown'</button>
   </div>
+  <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <a [routerLink]="['/account', 20, 'b_name', 'b_status']" href="">Call account route with parameters via RouterLink</a>
+  </div>
 </div>
 

@@ -31,7 +31,9 @@ const appRoutes: Routes = [
   { path: 'game', component: GameConsoleComponent},
   { path: 'directive', component: DirectiveTutorialComponent},
   { path: 'services', component: AccountManagerComponent},
-  { path: 'routing', component: RouterTutorialComponent}
+  { path: 'routing', component: RouterTutorialComponent},
+  { path: 'account/:id/:name/:status', component: AccountComponent}
+
 ];
 
 @NgModule({

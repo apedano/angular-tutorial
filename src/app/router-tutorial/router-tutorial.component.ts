@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-router-tutorial',
@@ -14,7 +15,8 @@ export class RouterTutorialComponent implements OnInit {
     { path: 'game', component: GameConsoleComponent},
     { path: 'directive', component: DirectiveTutorialComponent},
     { path: 'services', component: AccountManagerComponent},
-    { path: 'routing', component: RouterTutorialComponent}
+    { path: 'routing', component: RouterTutorialComponent},
+    { path: 'account/:id/:name/:status', component: AccountComponent}
   ];
   `;
 
@@ -36,10 +38,36 @@ export class RouterTutorialComponent implements OnInit {
 
   snippet6 = `<li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Input binding</a></li>"`;
 
+  snippet7 = `ngOnInit(): void {
+    this.currentRoute.params
+      .subscribe(
+        (updatedParams: Params) => {
+          if(updatedParams['id'] && updatedParams['name'] && updatedParams['status']) {
+            this.id = updatedParams['id'];
+            this.account = {
+              name: updatedParams['name'],
+              status: updatedParams['status']
+            }
+          }
 
-  constructor() { }
+        }
+      );
+  } `;
+
+  snippet8 = `<a [routerLink]="['/account', 20, 'b_name', 'b_status']" href="">Call account route with parameters via RouterLink</a>`;
+
+  constructor(private router: Router, private currentRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+  goToGame() {
+    //array of elements of the new path
+    this.router.navigate(['../game'], {relativeTo: this.currentRoute});
+  }
+
+  goToAccount() {
+    this.router.navigate(['../account', '1', 'account_name', 'account_status'], {relativeTo: this.currentRoute});
   }
 
 }
