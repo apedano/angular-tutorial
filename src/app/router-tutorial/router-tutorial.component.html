@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h2 class="notes">Routing module configuration</h2>
+        <div class="notes">
+            <p> The <code>app.module.ts</code> is the place where we add <b>Routes</b></p>
+            <pre>
+                <code>{{snippet1}}</code>
+             </pre>
+        </div>
+        <div class="notes">
+            Then we have to register the routes in the application <code>@NgModule</code>
+            <pre>
+                <code>{{snippet2}}</code>
+             </pre>
+             by doing that we register our defines routes to the router engine of Angular.
+        </div>
+        <div class="notes">
+            Then we have to define where we want our routed componets to be rendered in our application.
+            we add the <code>router-outlet</code> tag in that place
+        </div>
+        <hr>
+        <div class="notes">
+            We can add navigation links in our components (as in the tabs in the navigation of the AppComponent)     
+            one case is to simply add the path to an anchor element
+        </div>
+        <pre>
+            <code>{{snippet3}}</code>
+         </pre>
+         <div class="notes"> The problem is that it is <span class="warning">reloading the application every time</span> , making it no longer a single page application</div>
+         <h2 class="notes">Using routing links</h2>
+         <div class="notes"> We should use a dedicated directive instead, <span class="warning">which used absolute and relative paths</span> </div>
+         <pre>
+            <code>{{snippet4}}</code>
+         </pre>
+         <div class="notes">The router link intercepts the click element and deletes the default action of reloading the browser, forwarding the request to the Angular's router</div>
+         <h3 class="notes">Active router link</h3>
+         <div class="notes">
+            The directive (can be used within the anchor element itself or also outside) will add the css class in the input to the element if the corresponding link is active
+         </div>
+         <pre>
+            <code>{{snippet5}}</code>
+         </pre>
+         <div class="notes">This will always make the link to '/' home active because it is done via matching (contains) the current path with the associated link. With the following configuration we force the exact match</div>
+         
+          
+    </div>
+</div>

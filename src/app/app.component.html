@@ -1,21 +1,19 @@
-<!-- <div class="container">
+<div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <h3>Ciao World</h3>
-            <hr>
-            <app-servers></app-servers>
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <ul class="nav nav-tabs">
+                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Input binding</a></li>
+                <li role="presentation" routerLinkActive="active"><a routerLink="/input-binding">Input binding</a></li>
+                <li role="presentation" routerLinkActive="active"><a [routerLink]="['/game']">Game</a></li>
+                <li role="presentation" routerLinkActive="active"><a routerLink="/directive">Directives</a></li>
+                <li role="presentation" routerLinkActive="active"><a routerLink="/services">Services injection</a></li>
+                <li role="presentation" routerLinkActive="active"><a routerLink="/routing">Routing</a></li>
+            </ul>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
-            <app-alerts></app-alerts>
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>
-<hr>
-<app-game-console></app-game-console>
-<app-custom-attr-directive></app-custom-attr-directive>
-<hr>
-<app-custom-struct-directive></app-custom-struct-directive> -->
-<hr>
-<app-account-manager></app-account-manager>
