@@ -56,6 +56,57 @@ export class RouterTutorialComponent implements OnInit {
 
   snippet8 = `<a [routerLink]="['/account', 20, 'b_name', 'b_status']" href="">Call account route with parameters via RouterLink</a>`;
 
+  snippet9 = `<a [routerLink]="['/servers', 5, 'edit']" 
+  [queryParams]="{allowEdit:1}"
+  fragment="loading"
+  href="#"
+  >Test link</a>`;
+
+  snippet10 = `goToServers(id: number) {
+    this.router.navigate(['/servers', id, 'edit'],
+      { queryParams: { allowEdit: '1' } , 
+      fragment: 'loading'});
+  }`;
+
+  snippet11 = `
+  console.log('params' + this.currentRoute.snapshot.queryParams);
+  console.log('fragment' + this.currentRoute.snapshot.fragment);
+  this.currentRoute.queryParams
+  .subscribe(
+    (qParams: Params) => {
+      this.queryParams = qParams;
+    }
+  );
+  this.currentRoute.fragment
+  .subscribe(
+    (frag: string) => {
+      this.fragment = frag;
+    }
+  );
+  this.currentRoute.params
+    .subscribe(
+      (updatedParams: Params) => {
+        if (updatedParams['id']) {
+          this.id = updatedParams['id']
+        }
+      }
+    );
+  `;
+
+  snippet12 = `
+  { path: 'server-nested', component: ServerNestedComponent, children: [
+    { path: ':id', component: ServerEditComponent}
+]},
+  `;
+
+  snippet13 = ` 
+  <a [routerLink]="['/server-nested', server.id]" href="#">Open server {{server.id}}</a>`;
+
+snippet14 = `
+{ path: 'not-found', component: PageNotFoundComponent },
+{ path: '**', redirectTo: './not-found' }
+`;
+
   constructor(private router: Router, private currentRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -63,11 +114,19 @@ export class RouterTutorialComponent implements OnInit {
 
   goToGame() {
     //array of elements of the new path
-    this.router.navigate(['../game'], {relativeTo: this.currentRoute});
+    this.router.navigate(['../game'], { relativeTo: this.currentRoute });
   }
 
   goToAccount() {
-    this.router.navigate(['../account', '1', 'account_name', 'account_status'], {relativeTo: this.currentRoute});
+    this.router.navigate(['../account', '1', 'account_name', 'account_status'], { relativeTo: this.currentRoute });
   }
+
+  goToServers(id: number) {
+    this.router.navigate(['/servers', id, 'edit'],
+      { queryParams: { allowEdit: '1' } , 
+      fragment: 'loading'});
+  }
+
+
 
 }

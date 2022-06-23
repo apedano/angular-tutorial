@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <ul class="list-group">
+                <li *ngFor="let server of servers" class="list-group-item">
+                    Server id:{{server.id}} status:{{server.status}} 
+                    <a [routerLink]="['/server-nested', server.id]" href="#">Open server {{server.id}}</a>
+                </li>
+              </ul>
+        </div>
+        <div class="col-xs-6">
+            Here goes the server detail component
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+

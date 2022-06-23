@@ -63,5 +63,46 @@
          <pre>
             <code>{{snippet8}}</code>
          </pre>
+         <h3 class="notes">Passing query parameters</h3>
+         <div class="notes"> <code>domain/requestParam1?queryParam1=value1&queryParam2=value2#idParameter</code> </div>
+         <div>
+            This is a link with a <code>routerLink</code> including all the component of the route defined as 
+            <code> path: 'servers/:id/edit', component: ServerEditComponent</code>
+            <a [routerLink]="['/servers', 5, 'edit']" 
+            [queryParams]="{allowEdit:1}"
+            fragment="loading"
+            href="#"
+            >Test link</a>
+            <pre>
+               <code>{{snippet9}}</code>
+            </pre>
+            <div class="notes"> <code>[queryParams] [fragment]</code> are bindable properties of the routerLink directive </div>
+            <div>It will resolve to <code>/servers/5/edit?allowEdit=1#loading</code> we can also do it programmatically</div>
+            <div><button class="btn btn-primary" (click)="goToServers(5)">goToServers(5)</button></div>
+            <pre>
+               <code>{{snippet10}}</code>
+            </pre>
+            <h3 class="notes">Retrive router paramaters</h3>
+            <pre>
+               <code>{{snippet11}}</code>
+            </pre>
+            <h3 class="notes">Nested Routing</h3>
+            <div class="notes">Example of nested routes</div>
+            <pre>
+               <code>{{snippet12}}</code>
+            </pre>
+            <div class="notes">The children routes are not rendered in the normal <code>router-outlet</code> tag in the application. Child routes need a <span class="warning">separate outlet</span></div>
+            <div class="notes">The corresponding link will be</div>
+            <pre>
+               <code>{{snippet13}}</code>
+            </pre>
+            <app-server-nested></app-server-nested>
+            <h3 class="notes">Redirecting and wildcards</h3>
+            <div class="notes">Make sure the <b>**</b> route is put at the end of the rules as the <span class="warning">default route</span></div>
+            <pre>
+               <code>{{snippet14}}</code>
+            </pre>
+         </div>
+         <hr>
     </div>
 </div>
