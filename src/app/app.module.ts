@@ -21,32 +21,13 @@ import { AccountComponent } from './account-manager/account/account.component';
 import { NewAccountComponent } from './account-manager/new-account/new-account.component';
 import { LoggingService } from './account-manager/loggin.service';
 import { RouterTutorialComponent } from './router-tutorial/router-tutorial.component';
-import { RouterModule, Routes } from '@angular/router';
 import { InputBindingTutorialComponent } from './input-binding-tutorial/input-binding-tutorial.component';
 import { DirectiveTutorialComponent } from './directive-tutorial/directive-tutorial.component';
 import { ServerEditComponent } from './router-tutorial/server-edit/server-edit.component';
 import { ServerNestedComponent } from './router-tutorial/server-nested/server-nested.component';
 import { PageNotFoundComponent } from './router-tutorial/page-not-found/page-not-found.component';
+import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [
-  { path: '', component: GameConsoleComponent },
-  { path: 'input-binding', component: InputBindingTutorialComponent },
-  { path: 'game', component: GameConsoleComponent },
-  { path: 'directive', component: DirectiveTutorialComponent },
-  { path: 'services', component: AccountManagerComponent },
-  { path: 'routing', component: RouterTutorialComponent },
-  { path: 'account/:id/:name/:status', component: AccountComponent },
-  // { path: 'servers', component: ServerEditComponent, children: [
-  //   { path: ':id/edit', component: ServerEditComponent}
-  // ]},
-  {
-    path: 'server-nested', component: ServerNestedComponent, children: [
-      { path: ':id', component: ServerEditComponent }
-    ]
-  },
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: '/not-found' }
-];
 
 @NgModule({
   declarations: [
@@ -68,7 +49,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)
+    BrowserModule, FormsModule, AppRoutingModule
   ],
   providers: [LoggingService],
   bootstrap: [AppComponent]
