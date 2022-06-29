@@ -2,11 +2,13 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AccountManagerComponent } from "./account-manager/account-manager.component";
 import { AccountComponent } from "./account-manager/account/account.component";
+import { AuthGuard } from "./auth-gard.service";
 import { DirectiveTutorialComponent } from "./directive-tutorial/directive-tutorial.component";
 import { GameConsoleComponent } from "./game-console/game-console.component";
 import { InputBindingTutorialComponent } from "./input-binding-tutorial/input-binding-tutorial.component";
 import { PageNotFoundComponent } from "./router-tutorial/page-not-found/page-not-found.component";
 import { RouterTutorialComponent } from "./router-tutorial/router-tutorial.component";
+import { CanDeactivateGuard } from "./router-tutorial/server-edit/can-deactivate-guard.service";
 import { ServerEditComponent } from "./router-tutorial/server-edit/server-edit.component";
 import { ServerNestedComponent } from "./router-tutorial/server-nested/server-nested.component";
 
@@ -22,8 +24,8 @@ const appRoutes: Routes = [
     //   { path: ':id/edit', component: ServerEditComponent}
     // ]},
     {
-        path: 'server-nested', component: ServerNestedComponent, children: [
-            { path: ':id', component: ServerEditComponent }
+        path: 'server-nested', component: ServerNestedComponent, canActivate: [AuthGuard], children: [
+            { path: ':id', component: ServerEditComponent, canDeactivate: [CanDeactivateGuard] }
         ]
     },
     { path: 'not-found', component: PageNotFoundComponent },

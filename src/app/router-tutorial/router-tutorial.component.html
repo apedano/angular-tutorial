@@ -102,6 +102,35 @@
             <pre>
                <code>{{snippet14}}</code>
             </pre>
+            <h3 class="notes">Guards</h3>
+            <div class="notes">Functionality executed before a route is loaded or after we leave a route</div>
+            <div class="notes">Once the class is defined in our application we implement the method</div>
+            <pre>
+               <code>{{snippet15}}</code>
+            </pre>
+            <div class="notes">It can run asynchrounously (with premise or observabla) or synchrounously (boolean)</div>
+            <div class="notes">To use it we add the guard to the route definition we want to be guarded, <span class="warning">it will be applied also to the children routes</span> </div>
+            <pre>
+               <code>{{snippet16}}</code>
+            </pre>
+            <div class="notes">The <code>canActivateChild()</code> method applies only to the child routes</div>
+            <div>If we now click on the login button, we should be able to open the route</div>
+            <div>
+               <button class="btn btn-success" (click)="doLogin()">Login</button>
+               <button class="btn btn-danger" (click)="doLogout()">Logout</button>
+               <p class="bg-warning">{{userStatus}}</p>
+            </div>
+            <a [routerLink]="['/servers', 5, 'edit']" 
+            [queryParams]="{allowEdit:1}"
+            fragment="loading"
+            href="#"
+            >Click me (only reachable if logged in)</a>
+            <div class="notes">The same way we added a <code>canDeactivate</code> guard to a route, to handle the condition where the route is going to be left</div>
+            <pre>
+               <code>{{snippet17}}</code>
+            </pre>
+            <div class="notes">The involved component here has to implement the <code>CanComponentDeactivate</code> interface to implement the specific behavior when we are going to leave the component</div>
+            
          </div>
          <hr>
     </div>

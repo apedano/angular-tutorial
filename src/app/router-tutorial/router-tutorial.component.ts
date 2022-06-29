@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-router-tutorial',
@@ -7,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./router-tutorial.component.css']
 })
 export class RouterTutorialComponent implements OnInit {
+
+  userStatus: string;
 
   snippet1: string = `
   const appRoutes: Routes = [
@@ -107,9 +110,64 @@ snippet14 = `
 { path: '**', redirectTo: './not-found' }
 `;
 
-  constructor(private router: Router, private currentRoute: ActivatedRoute) { }
+snippet15 = `
+@Injectable()
+export class AuthGuard implements CanActivate, CanActivateChild {
+
+    constructor(private authService: AuthService, private router: Router) { }
+    
+
+    canActivate(route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        //in this case we return a promise    
+        return this.authService.isAuthenticated().then(
+            (authenticated: boolean) => {
+                if (authenticated) {
+                    return true;
+                } else {
+                    this.router.navigate(['/']);
+                }
+            }
+        );
+    }
+
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+        return this.canActivate(childRoute, state);
+    }
+
+}
+`;
+
+snippet16 = `
+{
+  path: 'server-nested', component: ServerNestedComponent, canActivate: [AuthGuard], children: [
+      { path: ':id', component: ServerEditComponent }
+  ]
+},
+`;
+
+snippet17 = `
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean
+}
+
+@Injectable()
+export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+  
+  canDeactivate(component: CanComponentDeactivate, 
+      currentRoute: ActivatedRouteSnapshot, 
+      currentState: RouterStateSnapshot, 
+      nextState?: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+          
+          return component.canDeactivate();
+  }
+}
+`;
+
+  constructor(private router: Router, private currentRoute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.refreshUserStatus();  
   }
 
   goToGame() {
@@ -126,6 +184,23 @@ snippet14 = `
       { queryParams: { allowEdit: '1' } , 
       fragment: 'loading'});
   }
+
+  doLogin() {
+    this.authService.login();
+    this.refreshUserStatus();
+  }
+
+  doLogout() {
+    this.authService.logout();
+    this.refreshUserStatus();
+  }
+
+
+  refreshUserStatus() {
+    this.userStatus = this.authService.loggedIn ? 'logged' : 'not logged';
+  }
+
+
 
 
 

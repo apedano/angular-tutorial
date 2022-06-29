@@ -27,6 +27,9 @@ import { ServerEditComponent } from './router-tutorial/server-edit/server-edit.c
 import { ServerNestedComponent } from './router-tutorial/server-nested/server-nested.component';
 import { PageNotFoundComponent } from './router-tutorial/page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-gard.service';
+import { CanDeactivateGuard } from './router-tutorial/server-edit/can-deactivate-guard.service';
 
 
 @NgModule({
@@ -51,7 +54,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule, FormsModule, AppRoutingModule
   ],
-  providers: [LoggingService],
+  providers: [LoggingService, AuthService, AuthGuard, CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
