@@ -130,7 +130,29 @@
                <code>{{snippet17}}</code>
             </pre>
             <div class="notes">The involved component here has to implement the <code>CanComponentDeactivate</code> interface to implement the specific behavior when we are going to leave the component</div>
-            
+            <h3 class="notes">Passing static data to a Route</h3>
+            <div class="notes">In this case we use the <code>error-page</code> component. We first declare the router data</div>
+            <pre>
+               <code>{{snippet18}}</code>
+            </pre>
+            <div class="notes">Then we can subscribe to changes in the data from the injected <code>ActivatedRoute</code></div>
+            <pre>
+               <code>{{snippet19}}</code>
+            </pre>
+            <h3 class="notes">Location strategies</h3>
+            <div class="notes">The normal routes used by angular might be mixed with domain paths from a hosting server running the Angular applicatin</div>
+            <div class="notes">One way to make the hosting server to always point to the same path and then dinamycally use the routes in our application is to use the <code>RouterModule.forRoot(appRoutes, {{ '{' }}useHash: true{{ '}' }})</code> configuration in the router config</div>
+            <div class="notes">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-xs-4"><code>host.domain/my-route-path</code></div>
+                     <div class="col-xs-2">-></div>
+                     <div class="col-xs-4"><code>host.domain/#/my-route-path</code></div>
+                  </div>
+               </div>
+               <div class="notes">This way the server will always serve the same <code>index.html</code> page which is the single page for Angular applications</div>
+            </div>
+
          </div>
          <hr>
     </div>

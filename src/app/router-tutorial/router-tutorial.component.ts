@@ -164,6 +164,22 @@ export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate>
 }
 `;
 
+snippet18 = `
+{ path: 'not-found', component: ErrorPageComponent, data: {errorMessage: 'Page not found!'} }
+`;
+
+snippet19 = `
+constructor(private activatedRoute: ActivatedRoute) { }
+
+ngOnInit(): void {
+  this.activatedRoute.data.subscribe(
+    (data: Data) => {
+      this.errorMessage = data['errorMessage'];
+    }
+  );
+}
+`;
+
   constructor(private router: Router, private currentRoute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
