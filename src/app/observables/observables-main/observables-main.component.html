@@ -1,0 +1,47 @@
+<h2 class="notes">Observables</h2>
+<div class="notes">A first example is the subscription to the parameters of the <code>ActivatedRoute</code> injected in the constructor</div>
+<pre>
+    <code>{{snippet1}}</code>
+ </pre>
+ <h3 class="notes">First example: <i>Interval</i></h3>
+ <div class="notes">It emits an incrementing value every ms given as parameter</div>
+ <div class="notes">In the example every half a second</div>
+ <pre>
+    <code>{{snippet2}}</code>
+ </pre>
+ <div>Emitted: {{countFromInterval}}</div>
+ <h3 class="notes">The importance of unsubscribing</h3>
+ <div class="notes warning">A new observable is geneted every time the hosting component is regenerate (every time we click on it)</div>
+ <div class="notes">To avoid it we assign the subscription to a class attribute and we cancel it on <code>OnDestroy</code> lifecycle hook</div>
+ <pre>
+    <code>{{snippet3}}</code>
+ </pre>
+ <h3 class="notes">Custom observables</h3>
+ <pre>
+   <code>{{snippet4}}</code>
+</pre>
+
+<h4 class="notes">Errors and completion</h4>
+<div class="notes">The observerable calls the methods:
+   <ul>
+      <li><code>next</code></li>
+      <li><code>error</code></li>
+      <li><code>complete</code></li>
+   </ul> 
+   When the error event is emitted the observable sequence stops (theoretically no unsubscribe action is required)
+ </div>
+ <div class="row">
+   <div class="col-xs-6">
+      <button class="btn btn-info" [disabled]="errorMyObservable || completeMyObservable" (click)="onCompletetMyObservable()">Complete <i>myObservable</i></button>
+   </div>
+   <div class="col-xs-6">
+      <button class="btn btn-danger" [disabled]="errorMyObservable || completeMyObservable" (click)="onErrorMyObservable()">Emit error on <i>myObservable</i></button>
+   </div>
+ </div>
+
+<div>Observed values from <code>myObservable</code>: {{countFromMyObservable}}</div>
+
+
+
+
+

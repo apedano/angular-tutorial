@@ -71,6 +71,9 @@
               "browserTarget": "my-first-app:build:development"
             }
           },
+          "options": {
+            "port": 4220
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

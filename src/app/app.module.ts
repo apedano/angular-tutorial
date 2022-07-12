@@ -31,6 +31,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-gard.service';
 import { CanDeactivateGuard } from './router-tutorial/server-edit/can-deactivate-guard.service';
 import { ErrorPageComponent } from './router-tutorial/error-page/error-page.component';
+import { ObservablesMainComponent } from './observables/observables-main/observables-main.component';
+
 
 
 @NgModule({
@@ -51,10 +53,11 @@ import { ErrorPageComponent } from './router-tutorial/error-page/error-page.comp
     ServerEditComponent,
     ServerNestedComponent,
     PageNotFoundComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ObservablesMainComponent
   ],
   imports: [
-    BrowserModule, FormsModule, AppRoutingModule
+    BrowserModule, FormsModule, AppRoutingModule, AppRoutingModule
   ],
   providers: [LoggingService, AuthService, AuthGuard, CanDeactivateGuard],
   bootstrap: [AppComponent]
