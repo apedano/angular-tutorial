@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-observables-main',
@@ -70,15 +72,42 @@ export class ObservablesMainComponent implements OnInit, OnDestroy {
   });
   `;
 
+  snippet6 = `
+  const myPipedObservable = myObservable
+  .pipe(
+    filter(data => +data % 2 != 0), //filter even numbers
+    map((dataFromObservable: number) => 'Round ' + (dataFromObservable +1)
+    ));
+  `;
+
+  snippet7 = `
+  this.myDateSubject = new Subject<Date>();
+
+  this.myDateSubjectSubscription = 
+      this.myDateSubject.subscribe(currentDate => {
+        this.formattedDate = new DatePipe('en-US').transform(currentDate, 'dd/MM/YYYY HH:mm:ss:SSS');
+      });  
+  `;
+
+  snippet8 = `
+    onEmitNewDate(): void {
+      this.myDateSubject.next(new Date());  
+    } 
+  `;
 
   intervalSubscription : Subscription;
   myObservableSubscription : Subscription;
-  
+  pipedMyObservableSubscription: Subscription;
+  myDateSubjectSubscription: Subscription;
 
   countFromInterval: number;
   countFromMyObservable: number;
+  valueFromMyPipedObservable: string;
   errorMyObservable: boolean = false;
   completeMyObservable: boolean = false;
+  formattedDate: string;
+
+  myDateSubject: Subject<Date>;
 
   constructor() { }
   
@@ -100,16 +129,42 @@ export class ObservablesMainComponent implements OnInit, OnDestroy {
         }
       }, 1000)  
     });
+
     this.myObservableSubscription = myObservable.subscribe({
         next: (v) => this.countFromMyObservable = +v,
         error: (e) =>  alert('An error has been observed:' + e.message),
         complete: () => alert('MyObservable is complete!') 
     });
+    //operators
+    const myPipedObservable = myObservable
+    .pipe(
+      filter(data => +data % 2 != 0), //filter even numbers
+      map((dataFromObservable: number) => 'Round ' + (dataFromObservable +1)
+      ));
+      
+    this.pipedMyObservableSubscription = myPipedObservable
+      .subscribe(data => this.valueFromMyPipedObservable = data)
+    
+    //subject
+    this.myDateSubject = new Subject<Date>();
+
+    this.myDateSubjectSubscription = 
+      this.myDateSubject.subscribe(currentDate => {
+        this.formattedDate = new DatePipe('en-US').transform(currentDate, 'dd/MM/YYYY HH:mm:ss:SSS');
+      });
+
+  }
+
+
+  onEmitNewDate(): void {
+    this.myDateSubject.next(new Date());  
   }
 
   ngOnDestroy(): void {
     this.intervalSubscription.unsubscribe();
-    this.myObservableSubscription.unsubscribe(); 
+    this.myObservableSubscription.unsubscribe();
+    this.pipedMyObservableSubscription.unsubscribe();
+    this.myDateSubjectSubscription.unsubscribe();
   }
 
   onCompletetMyObservable(): void {

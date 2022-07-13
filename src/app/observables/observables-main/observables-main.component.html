@@ -40,8 +40,31 @@
  </div>
 
 <div>Observed values from <code>myObservable</code>: {{countFromMyObservable}}</div>
-
-
-
-
+<h3 class="notes">Operators</h3>
+<div class="notes">Allows an observer to operate manipulation on the emitted data from an observer. There are many in Rxjs <code>import  map  from 'rxjs/operators';</code></div>
+<h4 class="notes">Filter and Map</h4>
+<pre>
+   <code>{{snippet6}}</code>
+</pre>
+<div>Value of <code>valueFromMyPipedObservable</code>: <b>{{valueFromMyPipedObservable}}</b></div>
+<h3 class="notes">Subject</h3>
+<div class="notes">With normal observables, observers are <span class="warning">passive</span> meaning that they receive the observed data from the observable without knowing when this will happen.</div>
+<div class="notes">Subject is different because the <span class="warning">observer is active</span>. It actively calls <code>next()</code> on it to trigger next data to be emitted (good for user interactions)</div>
+<pre>
+   <code>{{snippet7}}</code>
+</pre>
+<div class="notes">
+   We can now trigger the emit of the next value with the callback in the click event handler of the button below
+</div>
+<pre>
+   <code>{{snippet8}}</code>
+</pre>
+<div class="row">
+   <div class="col-xs-3">
+      <button class="btn btn-info" (click)="onEmitNewDate()">Emit on Subject</button>
+   </div>
+   <div class="col-xs-9">
+      Value of the emitted (formatted) Date: <b>{{formattedDate}}</b>
+   </div>
+</div>
 
